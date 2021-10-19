@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:34 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/17 03:42:19 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/20 02:42:00 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
-		ft_putstr_fd("<usage> ./", 1);
+		ft_putstr_fd("<usage> ", 1);
 		ft_putstr_fd(argv[0], 1);
 		ft_putstr_fd(" [server_pid] [message]\n", 1);
 		return (EXIT_FAILURE);
@@ -27,40 +27,43 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-int	send_0(int pid)
+void	send_0(int pid)
 {
 	if (kill(pid, SIGUSR1) == FT_ERROR)
 		ft_exit_failure_with_msg("Signal(SIGUSR1) transmission failed.");
-	return (FT_SUCCESS);
 }
 
-int	send_1(int pid)
+void	send_1(int pid)
 {
 	if (kill(pid, SIGUSR2) == FT_ERROR)
 		ft_exit_failure_with_msg("Signal(SIGUSR2) transmission failed.");
-	return (FT_SUCCESS);
+}
+
+void	send_end_of_text(int pid)
+{
+	int	i;
+
+	i = 0;
+	while(i < 7)
+	{
+		send_1(pid);
+		i++;
+		usleep(100);
+	}
 }
 
 void	char_to_bits(int pid, char *c)
 {
-	unsigned char	flag;
-	int				i;
+	int	i;
 
-	i = 7;
+	i = 6;
 	while (i >= 0)
 	{
-		flag = (unsigned char) (*c & (1 << i));
-		if (flag == 0)
-		{
+		if ((*c & (1 << i)) == 0)
 			send_0(pid);
-			// printf("0 "); // TEST
-		}
 		else
-		{
 			send_1(pid);
-			// printf("1 "); // TEST
-		}
-		usleep(500);
+		usleep(100);
 		i--;
 	}
 }
@@ -77,12 +80,15 @@ int	str_to_bits(int pid, char *message)
 		// printf("\n"); //TEST
 		ptr_message++;
 	}
-	return (1);
+	send_end_of_text(pid);
+	return (FT_SUCCESS);
 }
 
 void	client(int pid, char *message)
 {
 	str_to_bits(pid, message);
-	printf("Sent signal to %d\n", pid);
-	usleep(500);
+	// printf("Sent signal to %d\n", pid);
+	ft_putstr_fd("Sent to ", 1);
+	ft_putnbr_fd(pid, 1);
+	ft_putstr_fd("\n", 1);
 }
