@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:34 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/22 02:06:54 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/22 04:02:14 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	send_end_of_text(int pid)
 	i = 0;
 	while (i < 7)
 	{
-		send_1(pid);
+		send_0(pid);
 		i++;
 		usleep(100);
 	}

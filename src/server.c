@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:32 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/22 02:43:06 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/22 03:45:25 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,42 +51,50 @@ void	char_to_bits(char c)
 // 	*c = 0;
 // }
 
+void	*s_memset(void *b, int c, size_t len)
+{
+	unsigned char	*s;
+
+	s = b;
+	while (len-- > -1)
+	{
+		s[len] = (unsigned char)c;
+	}
+	return (b);
+}
+
 void	handler(int signo, siginfo_t* info, void * uap)
 {
-	static char				buf[BUFFER_SIZE];
-	static int				buf_index;
-	static unsigned char	c;
-	static int				bit_index;
+	static char	buf[BUFFER_SIZE];
+	static int	buf_index;
+	static int	bit_index;
 
 	(void)info;
 	(void)uap;
-	// if (buf_index == 0)
-	// 	ft_memset(buf, 0, BUFFER_SIZE);
-	c |= (signo == SIGUSR2);
-	if (c == END_OF_TEXT || buf_index == BUFFER_SIZE - 2)
-	{
-		// clear_handler(buf, &buf_index, &c, &bit_index);
-		ft_putstr_fd(buf, 1);
-		ft_memset(buf, '\0', BUFFER_SIZE);
-		buf_index = 0;
-		bit_index = 0;
-		if (c == END_OF_TEXT)
-		{
-			ft_putstr_fd("\n", 1);
-			c = 0;
-			return ;
-		}
-		c = 0;
-	}
+	if (buf_index == 0 && bit_index == 0)
+		s_memset(buf, 0, BUFFER_SIZE);
+	buf[buf_index] |= (signo == SIGUSR2);
 	if (bit_index == 6)
 	{
-		buf[buf_index++] = c;
-		c = 0;
 		bit_index = 0;
+		if (buf[buf_index] == END_OF_TEXT)
+		{
+			buf_index = 0;
+			ft_putstr_fd(buf, 1);
+			ft_putstr_fd("\n", 1);
+			return ;
+		}
+		if (buf_index == BUFFER_SIZE - 1)
+		{
+			buf_index = 0;
+			ft_putstr_fd(buf, 1);
+			return ;
+		}
+		buf_index++;
 		return ;
 	}
 	bit_index++;
-	c <<= 1;
+	buf[buf_index] <<= 1;
 }
 
 /*
