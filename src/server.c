@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:32 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 03:41:40 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/22 02:43:06 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,41 @@ void	char_to_bits(char c)
 	}
 }
 
+// void	clear_handler(char *buf, int *buf_index, unsigned char *c, int *bit_index)
+// {
+// 	ft_putstr_fd(buf, 1);
+// 	ft_memset(buf, '\0', BUFFER_SIZE);
+// 	*buf_index = 0;
+// 	*bit_index = 0;
+// 	if (*c == END_OF_TEXT)
+// 	{
+// 		ft_putstr_fd("\n", 1);
+// 		*c = 0;
+// 		return ;
+// 	}
+// 	*c = 0;
+// }
+
 void	handler(int signo, siginfo_t* info, void * uap)
 {
-	static char				buf[100];
-	static int				buf_index = 0;
-	static unsigned char	c = 0;
-	static int				bit_index = 0;
+	static char				buf[BUFFER_SIZE];
+	static int				buf_index;
+	static unsigned char	c;
+	static int				bit_index;
 
 	(void)info;
 	(void)uap;
-	if (buf_index == 0)
-		ft_memset(buf, 0, 100);
+	// if (buf_index == 0)
+	// 	ft_memset(buf, 0, BUFFER_SIZE);
 	c |= (signo == SIGUSR2);
-	if (c == 127 || buf_index == 99)
+	if (c == END_OF_TEXT || buf_index == BUFFER_SIZE - 2)
 	{
+		// clear_handler(buf, &buf_index, &c, &bit_index);
 		ft_putstr_fd(buf, 1);
-		ft_memset(buf, '\0', 99);
+		ft_memset(buf, '\0', BUFFER_SIZE);
 		buf_index = 0;
 		bit_index = 0;
-		if (c == 127)
+		if (c == END_OF_TEXT)
 		{
 			ft_putstr_fd("\n", 1);
 			c = 0;
@@ -107,6 +123,6 @@ int	main(int argc, char **argv)
 	print_pid();
 	server();
 	while (FT_TRUE)
-		;
+		pause();
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:34 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 02:42:00 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/22 02:06:54 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	send_end_of_text(int pid)
 	int	i;
 
 	i = 0;
-	while(i < 7)
+	while (i < 7)
 	{
 		send_1(pid);
 		i++;
@@ -75,9 +75,7 @@ int	str_to_bits(int pid, char *message)
 	ptr_message = message;
 	while (*ptr_message)
 	{
-		// printf("message char: %c(%d)\t", *ptr_message, *ptr_message); // TEST
 		char_to_bits(pid, ptr_message);
-		// printf("\n"); //TEST
 		ptr_message++;
 	}
 	send_end_of_text(pid);
@@ -87,7 +85,6 @@ int	str_to_bits(int pid, char *message)
 void	client(int pid, char *message)
 {
 	str_to_bits(pid, message);
-	// printf("Sent signal to %d\n", pid);
 	ft_putstr_fd("Sent to ", 1);
 	ft_putnbr_fd(pid, 1);
 	ft_putstr_fd("\n", 1);
