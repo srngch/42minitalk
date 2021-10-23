@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/16 23:19:34 by sarchoi           #+#    #+#              #
-#    Updated: 2021/10/17 03:43:30 by sarchoi          ###   ########.fr        #
+#    Updated: 2021/10/24 01:15:47 by sarchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,9 @@ SRCS_CLIENT = src/$(CLIENT).c
 OBJS = $(SRCS:.c=.o)
 OBJS_SERVER = $(SRCS_SERVER:.c=.o)
 OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
-SRCS_BONUS = $(WILDCARD ./src/*_bonus.c)
-OBJS_BONUS = $(SRCS:.c=.o)
 
 LIBFT = libft
 LIBFT_FLAGS = -L $(LIBFT) -lft
-
 INC_FLAGS = -I includes -I $(LIBFT)
 
 green:=$(shell tput setaf 2)
@@ -38,8 +35,7 @@ all: $(LIBFT) $(SERVER) $(CLIENT)
 
 $(LIBFT):
 	@make all --silent --directory=$(LIBFT)
-	@make bonus --silent --directory=$(LIBFT)
-	$(info $(green)<MAKE> Libft - make bonus$(reset))
+	$(info $(green)<MAKE> Libft - make$(reset))
 
 $(SERVER): $(OBJS_SERVER) $(OBJS)
 	$(info $(green)<MAKE> SERVER$(reset))
@@ -52,11 +48,6 @@ $(CLIENT): $(OBJS_CLIENT) $(OBJS)
 %.o: %.c
 	$(info $(green)******** $(@) $(<) ********$(reset))
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC_FLAGS)
-
-bonus: $(OBJS) $(OBJS_BONUS)
-	$(info $(green)******** bonus ********$(reset))
-	$(CC) $(CFLAGS) -o $(SERVER) $^ $(LIBFT_FLAGS)
-	$(CC) $(CFLAGS) -o $(CLIENT) $^ $(LIBFT_FLAGS)
 
 clean:
 	$(info $(green)******** clean ********$(reset))
@@ -73,4 +64,4 @@ fclean: clean
 re: fclean all
 	$(info $(red)******** re ********$(reset))
 
-.PHONY: all clean fclean re bonus $(LIBFT) $(SERVER) $(CLIENT)
+.PHONY: all clean fclean re $(LIBFT) $(SERVER) $(CLIENT)
