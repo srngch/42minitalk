@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/24 14:42:20 by sarchoi           #+#    #+#              #
+#    Updated: 2021/10/24 14:49:44 by sarchoi          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -15,10 +27,10 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

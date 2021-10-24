@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:56:54 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/05/11 12:05:51 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/24 14:41:01 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_isspace(int c)
 	return (0);
 }
 
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	unsigned int	r;
 	int				sign;

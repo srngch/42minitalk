@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 23:46:05 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/24 01:17:43 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/24 14:43:42 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define FT_SUCCESS		1
 # define FT_ERROR		-1
 # define FT_EOF			0
-# define FT_NULL		((void *)0)
 
 typedef int	t_bool;
 # define FT_TRUE		1

@@ -6,10 +6,11 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/16 23:19:34 by sarchoi           #+#    #+#              #
-#    Updated: 2021/10/24 01:15:47 by sarchoi          ###   ########.fr        #
+#    Updated: 2021/10/24 14:49:17 by sarchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = minitalk
 SERVER = server
 CLIENT = client
 
@@ -37,6 +38,8 @@ $(LIBFT):
 	@make all --silent --directory=$(LIBFT)
 	$(info $(green)<MAKE> Libft - make$(reset))
 
+$(NAME): all
+
 $(SERVER): $(OBJS_SERVER) $(OBJS)
 	$(info $(green)<MAKE> SERVER$(reset))
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_FLAGS)
@@ -57,7 +60,7 @@ clean:
 
 fclean: clean
 	$(info $(green)******** fclean ********$(reset))
-	make fclean --directory=$(LIBFT)
+	@make fclean --directory=$(LIBFT)
 	$(info $(green)*** Libft - fclean $(reset))
 	rm -f $(SERVER) $(CLIENT)
 
