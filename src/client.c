@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:34 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/24 01:33:21 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/24 21:41:36 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	send_char_bits(int pid, char *c)
 			send_0(pid);
 		else
 			send_1(pid);
-		usleep(200);
+		// ft_putchar_fd('\0', 1);
+		// write(1, "\0", 1);
+		usleep(100);
 	}
 }
 
