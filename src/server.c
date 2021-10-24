@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:32 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/24 17:29:05 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/10/24 23:34:35 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,9 @@ void	handler(int signo, siginfo_t *info, void *uap)
 	(void)info;
 	(void)uap;
 	c |= ((signo == SIGUSR2) << (6 - bit_index));
-	// ft_putnbr_fd(((signo == SIGUSR2) << (6 - bit_index)), 1);
-	// ft_putstr_fd("[", 1);
-	// ft_putnbr_fd((signo == SIGUSR2), 1);
-	// ft_putstr_fd("]", 1);
 	if (bit_index++ == 6)
 	{
-		// ft_putstr_fd("(", 1);
-		// ft_putnbr_fd(c, 1);
-		// ft_putstr_fd(")", 1);
 		write(STDOUT_FILENO, &c, 1);
-		// ft_putstr_fd("\n", 1);
 		c = 0;
 		bit_index = 0;
 		return ;
