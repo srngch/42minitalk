@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:47 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/11/05 21:43:10 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/11/06 17:50:11 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,4 @@ void	send_1(int pid)
 {
 	if (kill(pid, SIGUSR2) == FT_ERROR)
 		ft_exit_failure_with_msg("Signal(SIGUSR2) transmission failed.");
-}
-
-void	send_end_of_text(int pid)
-{
-	int	i;
-
-	i = 7;
-	while (i--)
-	{
-		send_0(pid);
-		usleep(50);
-	}
 }

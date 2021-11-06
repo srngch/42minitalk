@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:29:34 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/25 00:12:07 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/11/06 17:49:57 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	client(int pid, char *message)
 		message++;
 		usleep(10);
 	}
-	send_end_of_text(pid);
 	ft_putstr_fd("Sent to ", 1);
 	ft_putnbr_fd(pid, 1);
 	ft_putstr_fd("\n", 1);

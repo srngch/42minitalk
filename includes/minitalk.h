@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 23:46:05 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/10/24 14:43:42 by sarchoi          ###   ########.fr       */
+/*   Updated: 2021/11/06 17:50:06 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,8 @@ typedef int	t_bool;
 # define CYAN			"\x1b[36m"
 # define RESET			"\x1b[0m"
 
-# define BUFFER_SIZE	100
-# define END_OF_TEXT	0b00000000
-
 void	ft_exit_failure_with_msg(char *message);
 void	send_0(int pid);
 void	send_1(int pid);
-void	send_end_of_text(int pid);
 
 #endif
