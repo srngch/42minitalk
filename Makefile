@@ -6,11 +6,10 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/16 23:19:34 by sarchoi           #+#    #+#              #
-#    Updated: 2021/10/24 14:49:17 by sarchoi          ###   ########.fr        #
+#    Updated: 2021/11/09 17:36:07 by sarchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
 SERVER = server
 CLIENT = client
 
@@ -32,39 +31,35 @@ green:=$(shell tput setaf 2)
 reset:=$(shell tput sgr0)
 
 all: $(LIBFT) $(SERVER) $(CLIENT)
-	$(info $(green)<MAKE> all$(reset))
 
 $(LIBFT):
-	@make all --silent --directory=$(LIBFT)
-	$(info $(green)<MAKE> Libft - make$(reset))
-
-$(NAME): all
+	@make --silent --directory=$(LIBFT)
 
 $(SERVER): $(OBJS_SERVER) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS_SERVER) $(OBJS) $(LIBFT_FLAGS)
 	$(info $(green)<MAKE> SERVER$(reset))
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_FLAGS)
 
 $(CLIENT): $(OBJS_CLIENT) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS_CLIENT) $(OBJS) $(LIBFT_FLAGS)
 	$(info $(green)<MAKE> CLIENT$(reset))
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_FLAGS)
 
 %.o: %.c
-	$(info $(green)******** $(@) $(<) ********$(reset))
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC_FLAGS)
+	$(info $(green)<MAKE> $(<) -> $(@)$(reset))
 
 clean:
-	$(info $(green)******** clean ********$(reset))
-	@make clean --directory=$(LIBFT)
-	$(info $(green)*** Libft - clean ***$(reset))
-	rm -f $(OBJS) $(OBJS_SERVER) $(OBJS_CLIENT)
+	@make clean --silent --directory=$(LIBFT)
+	$(info $(green)<MAKE> Libft - clean$(reset))
+	@rm -f $(OBJS) $(OBJS_SERVER) $(OBJS_CLIENT)
+	$(info $(green)<MAKE> clean$(reset))
 
 fclean: clean
-	$(info $(green)******** fclean ********$(reset))
-	@make fclean --directory=$(LIBFT)
-	$(info $(green)*** Libft - fclean $(reset))
-	rm -f $(SERVER) $(CLIENT)
+	@make fclean --silent --directory=$(LIBFT)
+	$(info $(green)<MAKE> Libft - fclean$(reset))
+	@rm -f $(SERVER) $(CLIENT)
+	$(info $(green)<MAKE> fclean$(reset))
 
 re: fclean all
-	$(info $(red)******** re ********$(reset))
+	$(info $(red)<MAKE> re$(reset))
 
-.PHONY: all clean fclean re $(LIBFT) $(SERVER) $(CLIENT)
+.PHONY: all clean fclean re $(LIBFT)
